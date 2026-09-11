@@ -1,1266 +1,1744 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Andre Cristo — FiveM & Full-Stack Developer</title>
-  <meta name="description" content="Andre Cristo — Full-Stack Developer specializing in FiveM game development, React, Next.js and Node.js. Building immersive experiences for GTA V roleplay servers." />
-  <meta name="keywords" content="FiveM developer, GTA V scripts, Lua, React, Next.js, Node.js, TypeScript, full-stack, Brazil" />
-  <meta name="author" content="Andre Cristo" />
-  <meta property="og:title" content="Andre Cristo — FiveM & Full-Stack Developer" />
-  <meta property="og:description" content="Building immersive FiveM experiences and modern web applications." />
-  <meta property="og:url" content="https://andrecristodev.github.io/tadalas-systems/" />
-  <meta property="og:type" content="website" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://andrecristodev.github.io/tadalas-systems/" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andre Cristo — Senior Front-End & FiveM NUI Engineer | GTA VI Aesthetic Portfolio</title>
+
+  <meta name="description" content="Portfolio of Andre Cristo - Senior Front-End & FiveM NUI Engineer with 6+ years building high-performance game interfaces, low-resmon systems, and enterprise web platforms.">
+  <meta name="keywords" content="Andre Cristo, FiveM NUI, Front-End Engineer, React, Lua, GTA VI, Vice City, SantaGroup, Game UI, Low Resmon">
+  <meta name="author" content="Andre Cristo">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://andrecristodev.github.io/tadalas-systems/">
+  <meta property="og:title" content="Andre Cristo — Senior Front-End & FiveM NUI Engineer">
+  <meta property="og:description" content="Cinematic portfolio inspired by GTA VI. 6+ years engineering ultra-low resmon game UI, React NUI architectures, and web systems.">
+  <meta property="og:image" content="https://andrecristodev.github.io/tadalas-systems/preview.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ── Reset & tokens ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #080b10;
-      --surface:   #0d1117;
-      --card:      #111820;
-      --border:    #1e2a38;
-      --blue:      #58a6ff;
-      --blue-glow: #1f6feb;
-      --cyan:      #39d2c0;
-      --purple:    #9b72f7;
-      --text:      #e6edf3;
-      --muted:     #7d8fa3;
-      --font:      'Inter', system-ui, -apple-system, sans-serif;
-      --mono:      'JetBrains Mono', 'Fira Code', monospace;
-    }
-
-    html {
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ── Google Fonts ────────────────────────────────────────────── */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-    /* ── Section base ────────────────────────────────────────────── */
-    .section {
-      min-height: 100svh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 5rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .container {
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    /* ── Nav ─────────────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(8, 11, 16, 0.75);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(88, 166, 255, 0.08);
-      transition: background 0.3s;
-    }
-
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--blue);
-      letter-spacing: 0.05em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.2s;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    .nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--border);
-      transition: background 0.3s;
-      margin-left: 0.5rem;
-    }
-
-    /* ── Dot nav (right side) ────────────────────────────────────── */
-    .dot-nav {
-      position: fixed;
-      right: 1.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      z-index: 99;
-    }
-
-    .dot-nav button {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      border: none;
-      background: var(--border);
-      cursor: pointer;
-      transition: all 0.3s;
-      padding: 0;
-    }
-
-    .dot-nav button.active {
-      background: var(--blue);
-      box-shadow: 0 0 8px var(--blue);
-      transform: scale(1.4);
-    }
-
-    /* ── Canvas bg ───────────────────────────────────────────────── */
-    #canvas-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.35;
-    }
-
-    /* ── ① HERO ──────────────────────────────────────────────────── */
-    #hero {
-      text-align: center;
-      z-index: 1;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(88, 166, 255, 0.06);
-      border: 1px solid rgba(88, 166, 255, 0.2);
-      color: var(--blue);
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      padding: 0.4rem 1rem;
-      border-radius: 2rem;
-      margin-bottom: 2rem;
-      letter-spacing: 0.08em;
-      animation: fadeUp 0.8s ease both;
-    }
-
-    .hero-tag::before {
-      content: '';
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 6px var(--cyan);
-      animation: pulse 2s infinite;
-    }
-
-    .hero-name {
-      font-size: clamp(3rem, 9vw, 7rem);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      background: linear-gradient(135deg, #e6edf3 0%, #58a6ff 50%, #9b72f7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fadeUp 0.8s 0.1s ease both;
-      margin-bottom: 1rem;
-    }
-
-    .hero-title {
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      color: var(--muted);
-      font-weight: 400;
-      margin-bottom: 2.5rem;
-      animation: fadeUp 0.8s 0.2s ease both;
-    }
-
-    .hero-title span {
-      color: var(--blue);
-      font-weight: 600;
-    }
-
-    /* Typing cursor */
-    .typed-wrapper {
-      display: inline;
-    }
-
-    .typed-text { color: var(--cyan); }
-
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.2em;
-      background: var(--cyan);
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: blink 1s step-end infinite;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeUp 0.8s 0.3s ease both;
-      margin-bottom: 3.5rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.75rem;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: none;
-      cursor: pointer;
-      letter-spacing: 0.02em;
-    }
-
-    .btn-primary {
-      background: var(--blue-glow);
-      color: #fff;
-      box-shadow: 0 0 24px rgba(31, 111, 235, 0.35);
-    }
-
-    .btn-primary:hover {
-      background: var(--blue);
-      box-shadow: 0 0 36px rgba(88, 166, 255, 0.5);
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-1px);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 3rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeUp 0.8s 0.4s ease both;
-    }
-
-    .hero-stat {
-      text-align: center;
-    }
-
-    .hero-stat-num {
-      font-size: 2rem;
-      font-weight: 800;
-      font-family: var(--mono);
-      color: var(--blue);
-      display: block;
-      line-height: 1;
-    }
-
-    .hero-stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 0.25rem;
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      animation: fadeIn 2s 1s ease both;
-    }
-
-    .scroll-hint svg { animation: bounce 2s infinite; }
-
-    /* ── ② ABOUT ─────────────────────────────────────────────────── */
-    #about { background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%); z-index: 1; }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .about-visual {
-      position: relative;
-    }
-
-    .avatar-ring {
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .avatar-ring::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: conic-gradient(var(--blue), var(--purple), var(--cyan), var(--blue));
-      animation: spin 4s linear infinite;
-      z-index: 0;
-    }
-
-    .avatar-inner {
-      position: absolute;
-      inset: 3px;
-      border-radius: 50%;
-      background: var(--card);
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-    }
-
-    .code-badge {
-      position: absolute;
-      bottom: -1rem;
-      right: -1rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 0.75rem 1rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--cyan);
-      white-space: nowrap;
-      z-index: 2;
-    }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--blue);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-title .accent { color: var(--blue); }
-
-    .about-text {
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-
-    .about-text strong { color: var(--text); }
-
-    .skill-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .chip {
-      background: rgba(88, 166, 255, 0.06);
-      border: 1px solid rgba(88, 166, 255, 0.15);
-      color: var(--blue);
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      padding: 0.3rem 0.75rem;
-      border-radius: 0.35rem;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── ③ TRAJECTORY ────────────────────────────────────────────── */
-    #trajectory { background: var(--surface); z-index: 1; }
-
-    .timeline {
-      position: relative;
-      padding-left: 3rem;
-      max-width: 720px;
-      margin: 3rem auto 0;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0.55rem;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--blue), var(--purple), transparent);
-    }
-
-    .tl-item {
-      position: relative;
-      margin-bottom: 3rem;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: all 0.6s ease;
-    }
-
-    .tl-item.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .tl-dot {
-      position: absolute;
-      left: -2.55rem;
-      top: 0.35rem;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--blue);
-      border: 2px solid var(--bg);
-      box-shadow: 0 0 12px var(--blue);
-    }
-
-    .tl-date {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--cyan);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.35rem;
-    }
-
-    .tl-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 0.35rem;
-    }
-
-    .tl-company {
-      font-size: 0.85rem;
-      color: var(--blue);
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .tl-desc {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
-    }
-
-    .tl-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.75rem;
-    }
-
-    .tl-tag {
-      background: rgba(155, 114, 247, 0.08);
-      border: 1px solid rgba(155, 114, 247, 0.2);
-      color: var(--purple);
-      font-size: 0.7rem;
-      font-family: var(--mono);
-      padding: 0.2rem 0.6rem;
-      border-radius: 0.25rem;
-    }
-
-    /* ── ④ STACK ─────────────────────────────────────────────────── */
-    #stack { background: var(--bg); z-index: 1; }
-
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 1rem;
-      margin-top: 3rem;
-    }
-
-    .stack-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      transition: all 0.25s;
-      cursor: default;
-    }
-
-    .stack-card:hover {
-      border-color: var(--blue);
-      background: rgba(88, 166, 255, 0.04);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(88, 166, 255, 0.1);
-    }
-
-    .stack-icon {
-      font-size: 2rem;
-      margin-bottom: 0.6rem;
-      display: block;
-    }
-
-    .stack-name {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .stack-sub {
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-
-    /* ── ⑤ PROJECTS ──────────────────────────────────────────────── */
-    #projects { background: var(--surface); z-index: 1; }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      transition: all 0.25s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .project-card:hover {
-      border-color: rgba(88, 166, 255, 0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-    }
-
-    .project-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .project-icon {
-      font-size: 1.5rem;
-    }
-
-    .project-badge {
-      font-size: 0.7rem;
-      font-family: var(--mono);
-      padding: 0.25rem 0.6rem;
-      border-radius: 0.25rem;
-      border: 1px solid;
-    }
-
-    .badge-fivem {
-      color: #ff6b35;
-      border-color: rgba(255, 107, 53, 0.3);
-      background: rgba(255, 107, 53, 0.05);
-    }
-
-    .badge-web {
-      color: var(--cyan);
-      border-color: rgba(57, 210, 192, 0.3);
-      background: rgba(57, 210, 192, 0.05);
-    }
-
-    .project-name {
-      font-size: 1.05rem;
-      font-weight: 700;
-    }
-
-    .project-desc {
-      color: var(--muted);
-      font-size: 0.875rem;
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .project-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.5rem;
-    }
-
-    .project-lang {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .lang-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-    }
-
-    .project-link {
-      color: var(--blue);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .project-link:hover { text-decoration: underline; }
-
-    /* ── ⑥ CONTACT ───────────────────────────────────────────────── */
-    #contact { background: var(--bg); z-index: 1; text-align: center; }
-
-    .contact-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 2.5rem;
-    }
-
-    .contact-card {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 1rem 1.5rem;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: all 0.2s;
-      min-width: 180px;
-      justify-content: center;
-    }
-
-    .contact-card:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-2px);
-    }
-
-    .contact-card svg { flex-shrink: 0; }
-
-    .footer-text {
-      margin-top: 4rem;
-      color: var(--muted);
-      font-size: 0.8rem;
-      font-family: var(--mono);
-    }
-
-    .footer-text a { color: var(--blue); text-decoration: none; }
-
-    /* ── Animations ──────────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(6px); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--cyan); }
-      50%       { opacity: 0.5; box-shadow: 0 0 2px var(--cyan); }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Responsive ──────────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      html { scroll-snap-type: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
-      .avatar-ring { width: 180px; height: 180px; }
-      .code-badge { display: none; }
-      .nav-links { display: none; }
-      .dot-nav { display: none; }
-      .hero-stats { gap: 1.5rem; }
-    }
-
-    /* ── Section dividers ────────────────────────────────────────── */
-    .glow-line {
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--blue), var(--purple));
-      border-radius: 2px;
-      margin: 1.25rem 0 0;
-    }
+
+:root {
+  --neon-pink: #ff2a85;
+  --neon-cyan: #00f0ff;
+  --neon-amber: #ff9900;
+  --neon-purple: #9d4edd;
+  --bg-dark: #07060b;
+  --bg-surface: #0f0c1b;
+  --bg-glass: rgba(15, 12, 27, 0.75);
+  --border-glass: rgba(255, 42, 133, 0.25);
+  --border-cyan: rgba(0, 240, 255, 0.3);
+  --text-white: #f5f5fa;
+  --text-muted: #8e8a9f;
+  --font-display: 'Bebas Neue', 'Syne', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease-rockstar: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+/* Background Atmosphere */
+.ambient-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 42, 133, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.08) 0%, transparent 60%);
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* HUD Header */
+.hud-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(7, 6, 11, 0.85) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand-rockstar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.star-badge {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #f39c12, #e74c3c);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.star-badge:hover {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.brand-text {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #fff, var(--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-item {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px rgba(255, 42, 133, 0.6);
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-pink);
+  box-shadow: 0 0 8px var(--neon-pink);
+}
+
+.hud-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+}
+
+.telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(0, 240, 255, 0.05);
+  border: 1px solid var(--border-cyan);
+  border-radius: 4px;
+}
+
+.rec-pulse {
+  width: 8px;
+  height: 8px;
+  background: #ff3333;
+  border-radius: 50%;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* Fullpage Slider Core Engine */
+.fullpage-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.slider-container {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transition: transform 0.85s var(--ease-rockstar);
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 5rem 4rem;
+  overflow: hidden;
+}
+
+/* Slide HUD Framing */
+.slide-hud-frame {
+  position: absolute;
+  inset: 4.5rem 3rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.corner-tl, .corner-tr, .corner-bl, .corner-br {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--neon-pink);
+}
+
+.corner-tl { top: -2px; left: -2px; border-top: 2px solid; border-left: 2px solid; }
+.corner-tr { top: -2px; right: -2px; border-top: 2px solid; border-right: 2px solid; }
+.corner-bl { bottom: -2px; left: -2px; border-bottom: 2px solid; border-left: 2px solid; }
+.corner-br { bottom: -2px; right: -2px; border-bottom: 2px solid; border-right: 2px solid; }
+
+.frame-tag {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+.frame-tag-top { top: 6px; left: 24px; }
+.frame-tag-bottom { bottom: 6px; right: 24px; }
+
+/* Side Pagination Indicators */
+.side-nav {
+  position: fixed;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  z-index: 100;
+}
+
+.side-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--text-muted);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.side-dot::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(15, 12, 27, 0.9);
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--border-glass);
+  border-radius: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.side-dot:hover::after {
+  opacity: 1;
+}
+
+.side-dot.active {
+  border-color: var(--neon-pink);
+  background: var(--neon-pink);
+  box-shadow: 0 0 12px var(--neon-pink);
+  transform: rotate(45deg) scale(1.25);
+}
+
+/* Page Counter HUD */
+.counter-hud {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  z-index: 100;
+}
+
+.counter-curr {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+}
+
+.counter-sep {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.counter-total {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+/* Slide 1: HERO */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1100px;
+  z-index: 10;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--neon-amber);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 9vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.hero-title .glow-pink {
+  background: linear-gradient(135deg, #ffffff 10%, #ff7bb0 40%, var(--neon-pink) 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 35px rgba(255, 42, 133, 0.4));
+}
+
+.hero-tagline {
+  font-size: 1.35rem;
+  font-weight: 300;
+  max-width: 780px;
+  color: #c7c5d4;
+  line-height: 1.6;
+  margin-bottom: 2.8rem;
+}
+
+.hero-tagline strong {
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-gta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon-pink), #c2005a);
+  color: #fff;
+  box-shadow: 0 0 25px rgba(255, 42, 133, 0.5);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 40px rgba(255, 42, 133, 0.85);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.btn-secondary {
+  background: rgba(0, 240, 255, 0.08);
+  color: var(--neon-cyan);
+  border: 1px solid var(--border-cyan);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 240, 255, 0.18);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  cursor: pointer;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+/* Slide 2: DOSSIER / ABOUT */
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+  z-index: 10;
+}
+
+.dossier-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(16px);
+  border-radius: 8px;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.dossier-stamp {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.8rem;
+  padding: 0.4rem 1rem;
+  border: 2px solid var(--neon-amber);
+  color: var(--neon-amber);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transform: rotate(6deg);
+  opacity: 0.85;
+}
+
+.slide-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.slide-heading span {
+  color: var(--neon-pink);
+  text-shadow: 0 0 15px rgba(255, 42, 133, 0.5);
+}
+
+.slide-sub {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.bio-paragraph {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #c7c5d4;
+  margin-bottom: 1.5rem;
+}
+
+.bio-paragraph strong {
+  color: #fff;
+}
+
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.metric-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.2rem 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.metric-val {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--neon-pink);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.profile-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--bg-surface);
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.spec-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.spec-key {
+  color: var(--text-muted);
+}
+
+.spec-val {
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+/* Slide 3: TRAJECTORY / MISSIONS */
+.timeline-container {
+  width: 100%;
+  max-width: 1100px;
+  z-index: 10;
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.mission-card {
+  background: var(--bg-glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.8rem 1.4rem;
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mission-card:hover {
+  border-color: var(--neon-pink);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(255, 42, 133, 0.25);
+}
+
+.mission-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  padding: 0.25rem 0.6rem;
+  background: rgba(255, 42, 133, 0.12);
+  border: 1px solid var(--border-glass);
+  color: var(--neon-pink);
+  width: fit-content;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+
+.mission-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.mission-role {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  margin-bottom: 0.8rem;
+}
+
+.mission-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #a4a1b4;
+  margin-bottom: 1rem;
+}
+
+.mission-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.m-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 3px;
+  color: #8e8a9f;
+}
+
+/* Slide 4: WEAPONS / ARSENAL (TECH STACK) */
+.arsenal-container {
+  width: 100%;
+  max-width: 1200px;
+  z-index: 10;
+}
+
+.arsenal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+
+.weapon-card {
+  background: var(--bg-glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.weapon-card:hover {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 240, 255, 0.15);
+}
+
+.weapon-icon-box {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.weapon-info {
+  flex-grow: 1;
+}
+
+.weapon-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.weapon-type {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.weapon-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.weapon-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+}
+
+/* Slide 5: PROJECTS / CONTRACTS */
+.contracts-container {
+  width: 100%;
+  max-width: 1200px;
+  z-index: 10;
+}
+
+.contracts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  margin-top: 2rem;
+}
+
+.contract-card {
+  background: var(--bg-glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contract-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--neon-pink);
+  opacity: 0.7;
+}
+
+.contract-card:hover {
+  border-color: var(--neon-pink);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(255, 42, 133, 0.2);
+}
+
+.contract-status {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.contract-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.6rem;
+}
+
+.contract-desc {
+  font-size: 0.9rem;
+  color: #a4a1b4;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.contract-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contract-tech {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-amber);
+}
+
+.contract-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+}
+
+.contract-btn:hover {
+  color: var(--neon-cyan);
+}
+
+/* Slide 6: TRANSMISSION / CONTACT */
+.contact-container {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  z-index: 10;
+}
+
+.terminal-box {
+  background: rgba(7, 6, 11, 0.95);
+  border: 1px solid var(--border-cyan);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.15);
+}
+
+.terminal-header {
+  background: rgba(0, 240, 255, 0.08);
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.t-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.t-dot.red { background: #ff5f56; }
+.t-dot.yellow { background: #ffbd2e; }
+.t-dot.green { background: #27c93f; }
+
+.terminal-body {
+  padding: 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #00f0ff;
+}
+
+.terminal-body .comment { color: #5c6370; }
+.terminal-body .keyword { color: var(--neon-pink); }
+.terminal-body .string { color: var(--neon-amber); }
+.terminal-body .punct { color: #fff; }
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.channel-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--bg-glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.channel-btn:hover {
+  border-color: var(--neon-pink);
+  background: rgba(255, 42, 133, 0.08);
+  transform: translateX(8px);
+  box-shadow: 0 8px 25px rgba(255, 42, 133, 0.2);
+}
+
+.channel-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+}
+
+.channel-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.channel-desc {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Mobile & Tablet Adjustments */
+@media (max-width: 968px) {
+  .slide {
+    padding: 5rem 1.5rem 3rem;
+  }
+  .hud-header {
+    padding: 1rem 1.5rem;
+  }
+  .nav-links, .hud-telemetry {
+    display: none;
+  }
+  .side-nav {
+    display: none;
+  }
+  .dossier-grid, .contact-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .timeline-grid, .arsenal-grid, .contracts-grid {
+    grid-template-columns: 1fr;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  .counter-hud {
+    bottom: 1.2rem;
+    left: 1.5rem;
+  }
+  .slide-hud-frame {
+    inset: 4rem 1rem 1rem;
+  }
+}
+
   </style>
 </head>
 <body>
 
-<!-- Canvas particles background -->
-<canvas id="canvas-bg"></canvas>
+  <!-- Ambient visual overlays -->
+  <div class="ambient-mesh"></div>
+  <div class="scanlines"></div>
+  <div class="noise-overlay"></div>
 
-<!-- Nav -->
-<nav>
-  <span class="nav-logo">andre.dev</span>
-  <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#trajectory">Journey</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- Dot nav -->
-<div class="dot-nav" id="dotNav">
-  <button class="active" data-target="hero" title="Home"></button>
-  <button data-target="about" title="About"></button>
-  <button data-target="trajectory" title="Journey"></button>
-  <button data-target="stack" title="Stack"></button>
-  <button data-target="projects" title="Projects"></button>
-  <button data-target="contact" title="Contact"></button>
-</div>
-
-<!-- ① HERO -->
-<section class="section" id="hero">
-  <div class="container" style="position:relative;z-index:1;">
-    <div class="hero-tag">Available for new projects</div>
-    <h1 class="hero-name">Andre Cristo</h1>
-    <p class="hero-title">
-      <span class="typed-wrapper"><span class="typed-text" id="typedText"></span><span class="cursor"></span></span>
-    </p>
-    <div class="hero-ctas">
-      <a href="#projects" class="btn btn-primary">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        View Projects
-      </a>
-      <a href="#contact" class="btn btn-ghost">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Get in Touch
-      </a>
+  <!-- Tactical HUD Header -->
+  <header class="hud-header">
+    <div class="brand-rockstar" onclick="goToSlide(0)">
+      <div class="star-badge" title="Rockstar Inspired Design">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="brand-text">ANDRE CRISTO // VI</div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-num" data-count="6">0</span>
-        <span class="hero-stat-label">Years Coding</span>
+
+    <ul class="nav-links">
+      <li><a class="nav-item active" onclick="goToSlide(0)">01 // INTRO</a></li>
+      <li><a class="nav-item" onclick="goToSlide(1)">02 // DOSSIER</a></li>
+      <li><a class="nav-item" onclick="goToSlide(2)">03 // TRAJECTORY</a></li>
+      <li><a class="nav-item" onclick="goToSlide(3)">04 // ARSENAL</a></li>
+      <li><a class="nav-item" onclick="goToSlide(4)">05 // MISSIONS</a></li>
+      <li><a class="nav-item" onclick="goToSlide(5)">06 // CONTACT</a></li>
+    </ul>
+
+    <div class="hud-telemetry">
+      <div class="telemetry-item">
+        <div class="rec-pulse"></div>
+        <span>REC ● 4K 60FPS</span>
       </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num" data-count="43">0</span>
-        <span class="hero-stat-label">Repositories</span>
+      <div class="telemetry-item" title="Engine Optimization">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        <span>0.01ms RESMON</span>
       </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num" data-count="8694" data-suffix="k" data-divide="1000">0</span>
-        <span class="hero-stat-label">Contributions</span>
+      <div class="telemetry-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14v-4"/><path d="M3.34 17a10 10 0 1 1 17.32 0"/></svg>
+        <span>144 FPS</span>
       </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num" data-count="39">0</span>
-        <span class="hero-stat-label">Followers</span>
+      <div class="telemetry-item" id="hudClock">
+        22:45:18 EST
       </div>
+    </div>
+  </header>
+
+  <!-- Side Dot HUD Navigation -->
+  <nav class="side-nav">
+    <div class="side-dot active" data-tooltip="01 // INTRO" onclick="goToSlide(0)"></div>
+    <div class="side-dot" data-tooltip="02 // DOSSIER" onclick="goToSlide(1)"></div>
+    <div class="side-dot" data-tooltip="03 // TRAJECTORY" onclick="goToSlide(2)"></div>
+    <div class="side-dot" data-tooltip="04 // ARSENAL" onclick="goToSlide(3)"></div>
+    <div class="side-dot" data-tooltip="05 // MISSIONS" onclick="goToSlide(4)"></div>
+    <div class="side-dot" data-tooltip="06 // CONTACT" onclick="goToSlide(5)"></div>
+  </nav>
+
+  <!-- Counter HUD -->
+  <div class="counter-hud">
+    <span class="counter-curr" id="currSlide">01</span>
+    <span class="counter-sep">/</span>
+    <span class="counter-total">06</span>
+  </div>
+
+  <!-- Fullpage Slider Container -->
+  <div class="fullpage-wrapper">
+    <div class="slider-container" id="slider">
+
+      <!-- SLIDE 1: HERO / TITLE -->
+      <section class="slide" id="slide-0">
+        <div class="slide-hud-frame">
+          <div class="corner-tl"></div>
+          <div class="corner-tr"></div>
+          <div class="corner-bl"></div>
+          <div class="corner-br"></div>
+          <div class="frame-tag frame-tag-top">// LEONIDA SECTOR: VICE CITY // GRID: 25.7617° N, 80.1918° W</div>
+          <div class="frame-tag frame-tag-bottom">SEC_STATUS: CLEAR // LATENCY: 12ms</div>
+        </div>
+
+        <div class="hero-content">
+          <div class="hero-subtitle">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+            <span>NEXT-GEN GAMING FRONT-END & FIVEM NUI ARCHITECT</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="glow-pink">ANDRE CRISTO</span>
+          </h1>
+
+          <p class="hero-tagline">
+            Engineering <strong>ultra-responsive NUI ecosystems</strong>, high-octane gaming interfaces, and robust web applications with zero dropped frames. <strong>6+ years</strong> crafting high-concurrency experiences for SantaGroup and the top gaming communities in Brazil and worldwide.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-gta btn-primary" onclick="goToSlide(1)">
+              EXPLORE DOSSIER
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <button class="btn-gta btn-secondary" onclick="goToSlide(5)">
+              INITIATE CONTACT
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="scroll-hint" onclick="goToSlide(1)">
+          <span>SCROLL OR USE ARROWS</span>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: DOSSIER / ABOUT -->
+      <section class="slide" id="slide-1">
+        <div class="slide-hud-frame">
+          <div class="corner-tl"></div>
+          <div class="corner-tr"></div>
+          <div class="corner-bl"></div>
+          <div class="corner-br"></div>
+          <div class="frame-tag frame-tag-top">// SUBJECT FILE: AC-0684 // CLEARANCE: LEVEL 5</div>
+          <div class="frame-tag frame-tag-bottom">TARGET BIOMETRICS VERIFIED // ENCRYPTED</div>
+        </div>
+
+        <div class="dossier-grid">
+          <div class="dossier-card">
+            <div class="dossier-stamp">CONFIDENTIAL</div>
+            <h2 class="slide-heading">OPERATIVE <span>DOSSIER</span></h2>
+            <div class="slide-sub">// BIOGRAPHY & STRATEGIC POSITIONING</div>
+
+            <p class="bio-paragraph">
+              Specialized Front-End Engineer focused on <strong>Chromium Embedded Framework (CEF)</strong>, reactive FiveM NUI development, and modern full-stack web platforms. Over 6 years refining high-performance Lua-to-JavaScript communication pipelines where <strong>every microsecond of render time counts</strong>.
+            </p>
+            <p class="bio-paragraph">
+              Currently driving core UI development at <strong>SantaGroup</strong>, producing immersive interfaces that handle thousands of concurrent players with <strong>0.01ms Resmon</strong> benchmark stability.
+            </p>
+
+            <div class="metrics-row">
+              <div class="metric-box">
+                <div class="metric-val">6+</div>
+                <div class="metric-label">Years of Experience</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">0.01</div>
+                <div class="metric-label">ms Resmon Avg</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val">500K+</div>
+                <div class="metric-label">Players Impacted</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-visual">
+            <div class="spec-list">
+              <div class="spec-item">
+                <span class="spec-key">CALLSIGN</span>
+                <span class="spec-val">Andre Cristo (andrecristodev)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-key">CURRENT SQUAD</span>
+                <span class="spec-val">SantaGroup</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-key">SPECIALTY</span>
+                <span class="spec-val">FiveM NUI + Full-Stack React</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-key">PRIMARY ENGINE</span>
+                <span class="spec-val">CEF / Chromium NUI + Lua IPC</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-key">FRONT-END STACK</span>
+                <span class="spec-val">React, Next.js, TypeScript, Tailwind</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-key">BACK-END STACK</span>
+                <span class="spec-val">Node.js, PostgreSQL, MySQL, Prisma</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-key">LOCATION</span>
+                <span class="spec-val">Brazil (Global Remote Ready)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-key">AVAILABILITY</span>
+                <span class="spec-val" style="color: #27c93f;">● OPEN FOR ELITE CONTRACTS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: TRAJECTORY / CHRONOLOGY -->
+      <section class="slide" id="slide-2">
+        <div class="slide-hud-frame">
+          <div class="corner-tl"></div>
+          <div class="corner-tr"></div>
+          <div class="corner-bl"></div>
+          <div class="corner-br"></div>
+          <div class="frame-tag frame-tag-top">// MISSION LOGS // CHRONOLOGICAL CAMPAIGN</div>
+          <div class="frame-tag frame-tag-bottom">HISTORICAL ARCHIVE // 2020 - 2026</div>
+        </div>
+
+        <div class="timeline-container">
+          <h2 class="slide-heading">MISSION <span>CHRONOLOGY</span></h2>
+          <div class="slide-sub">// CAREER TRAJECTORY & FIELD EXPERIENCE</div>
+
+          <div class="timeline-grid">
+            <div class="mission-card">
+              <div>
+                <div class="mission-badge">2024 - PRESENT</div>
+                <div class="mission-title">SantaGroup</div>
+                <div class="mission-role">Senior NUI & Web Engineer</div>
+                <p class="mission-desc">
+                  Spearheading the next-generation game interface architecture for high-capacity servers. Developing responsive HUDs, inventory management, and web administrative platforms with strict sub-millisecond execution standards.
+                </p>
+              </div>
+              <div class="mission-tags">
+                <span class="m-tag">FiveM NUI</span>
+                <span class="m-tag">React</span>
+                <span class="m-tag">Lua</span>
+                <span class="m-tag">TypeScript</span>
+              </div>
+            </div>
+
+            <div class="mission-card">
+              <div>
+                <div class="mission-badge">2023 - 2024</div>
+                <div class="mission-title">Tadalas Systems</div>
+                <div class="mission-role">Lead Architect & Founder</div>
+                <p class="mission-desc">
+                  Engineered modern developer boilerplates and reusable UI components for the FiveM open-source ecosystem. Standardized type-safe IPC bridges between Lua game threads and browser-based React components.
+                </p>
+              </div>
+              <div class="mission-tags">
+                <span class="m-tag">Next.js</span>
+                <span class="m-tag">Node.js</span>
+                <span class="m-tag">PostgreSQL</span>
+                <span class="m-tag">Docker</span>
+              </div>
+            </div>
+
+            <div class="mission-card">
+              <div>
+                <div class="mission-badge">2022 - 2023</div>
+                <div class="mission-title">Custom Economy Systems</div>
+                <div class="mission-role">FiveM Systems Specialist</div>
+                <p class="mission-desc">
+                  Built intricate banking interfaces, vehicle modification tablets, and real-time multiplayer inventory engines. Pioneered zero-latency drag-and-drop state syncing with server-side validation.
+                </p>
+              </div>
+              <div class="mission-tags">
+                <span class="m-tag">MySQL</span>
+                <span class="m-tag">Tailwind</span>
+                <span class="m-tag">IPC Bridge</span>
+                <span class="m-tag">WebSockets</span>
+              </div>
+            </div>
+
+            <div class="mission-card">
+              <div>
+                <div class="mission-badge">2020 - 2022</div>
+                <div class="mission-title">Full-Stack Genesis</div>
+                <div class="mission-role">Software Developer</div>
+                <p class="mission-desc">
+                  Designed and delivered scalable full-stack web applications, REST APIs, and automated bots. Mastered DOM rendering mechanics and asynchronous JavaScript patterns that laid the foundation for game front-end engineering.
+                </p>
+              </div>
+              <div class="mission-tags">
+                <span class="m-tag">JavaScript</span>
+                <span class="m-tag">HTML5/CSS3</span>
+                <span class="m-tag">Git</span>
+                <span class="m-tag">REST APIs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: ARSENAL / TECH STACK -->
+      <section class="slide" id="slide-3">
+        <div class="slide-hud-frame">
+          <div class="corner-tl"></div>
+          <div class="corner-tr"></div>
+          <div class="corner-bl"></div>
+          <div class="corner-br"></div>
+          <div class="frame-tag frame-tag-top">// WEAPONS LOCKER // COMBAT-TESTED TECH STACK</div>
+          <div class="frame-tag frame-tag-bottom">ALL ASSETS VERIFIED // ZERO EXTERNAL DEPENDENCY</div>
+        </div>
+
+        <div class="arsenal-container">
+          <h2 class="slide-heading">TACTICAL <span>ARSENAL</span></h2>
+          <div class="slide-sub">// WEAPONS OF CHOICE & TECHNICAL PROFICIENCY</div>
+
+          <div class="arsenal-grid">
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="-11.5 -10.23174 23 20.46348" width="28" height="28"><circle cx="0" cy="0" r="2.05" fill="#61dafb"/><g stroke="#61dafb" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">React.js</div>
+                <div class="weapon-type">NUI Reactive Core</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 98%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><circle cx="64" cy="64" r="50" fill="#000080"/><circle cx="86" cy="38" r="15" fill="#fff"/><circle cx="106" cy="18" r="7" fill="#fff"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">Lua 5.4</div>
+                <div class="weapon-type">FiveM Game IPC Engine</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 95%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 180 180" width="28" height="28"><mask height="180" id="mask0" maskUnits="userSpaceOnUse" width="180"><circle cx="90" cy="90" fill="#fff" r="90"/></mask><g mask="url(#mask0)"><circle cx="90" cy="90" fill="#000" r="90"/><path d="M149.508 157.538L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.176 149.508 157.538Z" fill="url(#paint0_linear)"/><rect fill="url(#paint1_linear)" height="72" width="12" x="115" y="54"/></g><defs><linearGradient id="paint0_linear" x1="109" x2="144.5" y1="116.5" y2="160.5" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><linearGradient id="paint1_linear" x1="121" x2="120.799" y1="54" y2="106.875" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">Next.js</div>
+                <div class="weapon-type">SSR / Enterprise Web</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 92%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><rect width="128" height="128" rx="16" fill="#3178c6"/><path d="M57.6 57.6H43.2v46.4H30.4V57.6H16V46.4h41.6v11.2zm48.8 19.2c0 8.8-4.8 15.2-12.8 19.2-8 4-18.4 5.6-31.2 4.8V88c8 .8 14.4.8 19.2-.8s7.2-4 7.2-8c0-2.4-.8-4.8-2.4-6.4s-4.8-3.2-9.6-4.8c-7.2-2.4-12-4.8-15.2-7.2-3.2-2.4-4.8-6.4-4.8-12 0-8 4-13.6 12-16.8 8-3.2 17.6-4.8 28.8-4.8v12.8c-7.2-.8-12.8-.8-16.8.8-4 1.6-5.6 4-5.6 7.2 0 2.4.8 4.8 2.4 6.4 1.6 1.6 4.8 3.2 9.6 4.8 7.2 2.4 12.8 4.8 16 8 2.4 3.2 3.2 7.2 3.2 12z" fill="#fff"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">TypeScript</div>
+                <div class="weapon-type">Strict Typed Schemas</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 94%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><rect width="128" height="128" rx="16" fill="#f7df1e"/><path d="M73.6 84.8c2.4 4 5.6 7.2 9.6 8.8 4 1.6 8.8 2.4 14.4 2.4 4 0 7.2-.8 9.6-2.4 2.4-1.6 3.2-4 3.2-7.2 0-2.4-.8-4.8-2.4-6.4s-4.8-3.2-9.6-4.8l-8-2.4c-8-2.4-13.6-5.6-17.6-9.6-4-4-5.6-9.6-5.6-16.8 0-8.8 3.2-16 9.6-20.8 6.4-4.8 15.2-7.2 26.4-7.2 8.8 0 16.8 1.6 23.2 4.8 6.4 3.2 10.4 8 12.8 14.4l-12.8 8c-1.6-4-4-7.2-7.2-8.8-3.2-1.6-7.2-2.4-12-2.4-4 0-7.2.8-9.6 2.4s-3.2 4-3.2 6.4c0 2.4.8 4.8 2.4 6.4 1.6 1.6 4.8 3.2 9.6 4.8l8 2.4c8.8 2.4 15.2 5.6 19.2 9.6 4 4 6.4 9.6 6.4 17.6 0 9.6-3.2 16.8-10.4 21.6-7.2 4.8-16.8 7.2-28.8 7.2-11.2 0-20.8-2.4-28-7.2-7.2-4.8-12-12-14.4-21.6l15.2-6.4zm-48 1.6c1.6 2.4 3.2 4 5.6 5.6 2.4 1.6 5.6 2.4 9.6 2.4 3.2 0 5.6-.8 7.2-2.4 1.6-1.6 2.4-4 2.4-7.2V24H64v64.8c0 8-2.4 14.4-7.2 18.4-4.8 4-12 6.4-21.6 6.4-8 0-15.2-1.6-20.8-4.8-5.6-3.2-9.6-8-12-14.4l13.2-8z" fill="#000"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">JavaScript</div>
+                <div class="weapon-type">ESNext / Micro-Opt</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 98%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><path d="M64 8.5l48 27.7v55.6L64 119.5l-48-27.7V36.2L64 8.5z" fill="#339933"/><path d="M64 24.8L28.8 45.1v40.6L64 106l35.2-20.3V45.1L64 24.8z" fill="#026e00"/><path d="M64 43.1L45.4 53.8v21.4L64 85.9l18.6-10.7V53.8L64 43.1z" fill="#fff"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">Node.js</div>
+                <div class="weapon-type">Back-End Microservices</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 90%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><path d="M32 48c5.3-21.3 18.7-29.3 40-24-9.3 9.3-12 18.7-8 28 5.3 12 18.7 17.3 26.7 34.7 6.7 14.7 1.3 30.7-16 37.3-17.3 6.7-32 1.3-44-16 12-4 20-10.7 24-20 4-9.3 1.3-17.3-8-24-6.7-5.3-12-10.7-14.7-16zm-32 32c5.3-21.3 18.7-29.3 40-24-9.3 9.3-12 18.7-8 28 5.3 12 18.7 17.3 26.7 34.7 6.7 14.7 1.3 30.7-16 37.3-17.3 6.7-32 1.3-44-16 12-4 20-10.7 24-20 4-9.3 1.3-17.3-8-24-6.7-5.3-12-10.7-14.7-16z" fill="#06b6d4"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">Tailwind CSS</div>
+                <div class="weapon-type">Tactical Atomic Styling</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 96%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><path d="M64.6 15c-15.8 0-27.3 11-28.7 27.6-4.6 1-9.1 3-13 6.2-7.8 6.4-11.8 15.6-11.1 26.1.8 12.3 8.3 23.4 18.8 27.7 2.1 6.8 6.5 12.4 12.3 15.8 5.8 3.4 12.6 4.6 19.3 3.5 1.5 5 4.5 9.2 8.6 12 4.1 2.8 9.1 4.1 14.2 3.8 6.7-.4 12.8-3.4 17.3-8.2 4.5-4.8 6.9-11.2 6.6-17.9-.4-7.4-4-14.2-9.8-18.4 2.2-4.1 3.3-8.8 3-13.6-.5-9.6-6-17.8-14.3-21.4-.4-12.7-7-24-17.6-30.8-4.7-3.1-10.3-4.8-15.6-4.8z" fill="#336791"/><circle cx="56" cy="45" r="4" fill="#fff"/><circle cx="76" cy="45" r="4" fill="#fff"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">PostgreSQL</div>
+                <div class="weapon-type">Relational Database</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 88%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><path d="M123.6 85.3c-2.8-5.3-7.5-9.3-13-11.7 3.5-3.8 5.7-8.8 5.9-14.2.3-9-5.1-17.2-13.3-20.3-1.6-.6-3.3-1-5.1-1.2 2-3.8 2.7-8.2 1.8-12.5-1.5-6.8-6.1-12.5-12.4-15.3-7.7-3.4-16.7-2.6-23.7 2.2-7.6 5.2-12.2 13.8-12.4 23-.2 5.9 1.5 11.6 5 16.2-7.4 3.9-12.4 11.4-13.1 19.8-.7 8.3 2.9 16.3 9.4 21.3-11.7 2.5-22.3 8.9-30 18.2-1.8 2.2-2.9 4.9-3 7.8-.1 2.9.8 5.7 2.5 8 3.8 5.1 10.9 6.2 16 2.4 14.6-10.8 32.5-16.6 50.8-16.6 13 0 25.8 3 37.3 8.7 1.8.9 3.8 1.4 5.8 1.4 5.3 0 10.1-3.3 12-8.5 1.9-5.2.3-11.1-3.9-14.8z" fill="#00758f"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">MySQL / OxMySQL</div>
+                <div class="weapon-type">Game Server Schemas</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 93%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><path d="M117.8 54.4c-1.8-1.2-5.4-1.9-9.5-1.1-.9-7.3-5.2-13.6-11.9-17-1.2-.6-2.5-.2-3.1 1-.6 1.2-.2 2.5 1 3.1 5.3 2.7 8.8 7.7 9.5 13.5-2.8.9-5.1 2.5-6.8 4.7H10.2c-2.3 0-4.2 1.9-4.2 4.2v24.2c0 23.3 18.9 42.2 42.2 42.2 27.6 0 50.3-17.7 57.5-42.6 7.4-1.2 13.8-5.7 17.5-12.2 1.3-2.3.9-5.1-1.3-6.6zM32.2 45.3H20.5V33.6h11.7v11.7zm17.5 0H38.1V33.6h11.7v11.7zm17.6 0H55.6V33.6h11.7v11.7zm-35.1-17.5H20.5V16.1h11.7v11.7zm17.5 0H38.1V16.1h11.7v11.7zm17.6 0H55.6V16.1h11.7v11.7zm17.5 17.5H73.1V33.6h11.7v11.7zm0-17.5H73.1V16.1h11.7v11.7zm17.6 17.5H90.7V33.6h11.7v11.7z" fill="#2496ed"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">Docker</div>
+                <div class="weapon-type">Containerization</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 85%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 128 128" width="28" height="28"><path d="M103.7 98.7L67.4 12.4c-1.3-3.1-5.6-3.1-6.9 0L24.3 98.7c-.8 1.9-.1 4.1 1.6 5.3 1.7 1.2 4 1.1 5.6-.2l31.5-25.9 29.8 26.2c1.7 1.5 4.2 1.5 5.9.2 1.7-1.3 2.3-3.6 1.5-5.6h-6.5z" fill="#2d3748"/><path d="M64 82.5l-28.7 23.6 28.7-68 28.7 68L64 82.5z" fill="#0c344b"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">Prisma ORM</div>
+                <div class="weapon-type">Type-Safe Data Layer</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 90%;"></div></div>
+              </div>
+            </div>
+
+            <div class="weapon-card">
+              <div class="weapon-icon-box"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div>
+              <div class="weapon-info">
+                <div class="weapon-name">GitHub / CI-CD</div>
+                <div class="weapon-type">DevOps & Automation</div>
+                <div class="weapon-bar"><div class="weapon-fill" style="width: 92%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: MISSIONS / PROJECTS -->
+      <section class="slide" id="slide-4">
+        <div class="slide-hud-frame">
+          <div class="corner-tl"></div>
+          <div class="corner-tr"></div>
+          <div class="corner-bl"></div>
+          <div class="corner-br"></div>
+          <div class="frame-tag frame-tag-top">// CONTRACT DIRECTORY // HIGH PRIORITY TARGETS</div>
+          <div class="frame-tag frame-tag-bottom">AUTHENTICATION: GRANTED // STATUS: DELIVERED</div>
+        </div>
+
+        <div class="contracts-container">
+          <h2 class="slide-heading">FIELD <span>CONTRACTS</span></h2>
+          <div class="slide-sub">// SIGNATURE ARCHITECTURES & KEY DELIVERABLES</div>
+
+          <div class="contracts-grid">
+            <div class="contract-card">
+              <div>
+                <div class="contract-status">// ENTERPRISE SQUAD</div>
+                <div class="contract-title">SantaGroup NUI Ecosystem</div>
+                <p class="contract-desc">
+                  Integrated game UI suite featuring dynamic HUD, tactical inventory, and multi-tier organizational management with 0.01ms CPU resmon overhead.
+                </p>
+              </div>
+              <div class="contract-footer">
+                <span class="contract-tech">React • Lua • Tailwind</span>
+                <a href="https://santagroup.gg" target="_blank" class="contract-btn">
+                  VIEW SQUAD <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="contract-card">
+              <div>
+                <div class="contract-status">// CORE PLATFORM</div>
+                <div class="contract-title">Tadalas Systems</div>
+                <p class="contract-desc">
+                  Comprehensive developer portal, documentation hub, and automated microservices cluster built with Next.js App Router and PostgreSQL.
+                </p>
+              </div>
+              <div class="contract-footer">
+                <span class="contract-tech">Next.js • Node.js • Prisma</span>
+                <a href="https://github.com/andrecristodev/tadalas-systems" target="_blank" class="contract-btn">
+                  SOURCE <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="contract-card">
+              <div>
+                <div class="contract-status">// OPEN SOURCE TOOLING</div>
+                <div class="contract-title">FiveM React Boilerplate</div>
+                <p class="contract-desc">
+                  Battle-tested production starter for FiveM NUI developers featuring Vite, React 19, TypeScript, and bidirectional IPC listeners.
+                </p>
+              </div>
+              <div class="contract-footer">
+                <span class="contract-tech">Vite • React • TypeScript</span>
+                <a href="https://github.com/andrecristodev" target="_blank" class="contract-btn">
+                  REPOSITORIES <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="contract-card">
+              <div>
+                <div class="contract-status">// GAMEPLAY MECHANIC</div>
+                <div class="contract-title">Tactical Vehicle Tablet</div>
+                <p class="contract-desc">
+                  In-game diagnostic tablet with telemetry charts, real-time tuning adjustments, suspension physics feedback, and dyno statistics.
+                </p>
+              </div>
+              <div class="contract-footer">
+                <span class="contract-tech">CEF • Canvas • TypeScript</span>
+                <a href="https://github.com/andrecristodev" target="_blank" class="contract-btn">
+                  DETAILS <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="contract-card">
+              <div>
+                <div class="contract-status">// FINANCIAL INFRASTRUCTURE</div>
+                <div class="contract-title">Crypto & Wire Banking</div>
+                <p class="contract-desc">
+                  High-security virtual banking application featuring peer-to-peer wire transfers, investment graphs, and fraud mitigation algorithms.
+                </p>
+              </div>
+              <div class="contract-footer">
+                <span class="contract-tech">React • Node.js • SQL</span>
+                <a href="https://github.com/andrecristodev" target="_blank" class="contract-btn">
+                  DETAILS <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="contract-card">
+              <div>
+                <div class="contract-status">// IDENTITY SYSTEM</div>
+                <div class="contract-title">Cinematic Multi-Character</div>
+                <p class="contract-desc">
+                  Photorealistic character selection interface featuring dynamic weather synchronization, camera dolly transitions, and slot persistence.
+                </p>
+              </div>
+              <div class="contract-footer">
+                <span class="contract-tech">Lua Camera • React • Audio</span>
+                <a href="https://github.com/andrecristodev" target="_blank" class="contract-btn">
+                  DETAILS <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: TRANSMISSION / CONTACT -->
+      <section class="slide" id="slide-5">
+        <div class="slide-hud-frame">
+          <div class="corner-tl"></div>
+          <div class="corner-tr"></div>
+          <div class="corner-bl"></div>
+          <div class="corner-br"></div>
+          <div class="frame-tag frame-tag-top">// FREQUENCY TUNER // SECURE RECRUITING CHANNELS</div>
+          <div class="frame-tag frame-tag-bottom">SIGNAL STRENGTH: 100% // READY FOR DEPLOYMENT</div>
+        </div>
+
+        <div class="contact-container">
+          <div class="terminal-box">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <div class="t-dot red"></div>
+                <div class="t-dot yellow"></div>
+                <div class="t-dot green"></div>
+              </div>
+              <span>andre@vice-city-terminal:~</span>
+              <span>BASH</span>
+            </div>
+            <div class="terminal-body">
+              <span class="comment">// INITIATING SECURE COMMUNICATIONS PROTOCOL</span><br>
+              <span class="keyword">const</span> <span class="string">developer</span> = {<br>
+              &nbsp;&nbsp;name: <span class="string">'Andre Cristo'</span>,<br>
+              &nbsp;&nbsp;callsign: <span class="string">'andrecristodev'</span>,<br>
+              &nbsp;&nbsp;role: <span class="string">'Senior Front-End & FiveM NUI Engineer'</span>,<br>
+              &nbsp;&nbsp;experience: <span class="string">'6+ Years Professional'</span>,<br>
+              &nbsp;&nbsp;status: <span class="string">'Ready for High-Impact Projects'</span>,<br>
+              &nbsp;&nbsp;email: <span class="string">'contato.andredevbr@icloud.com'</span>,<br>
+              &nbsp;&nbsp;squad: <span class="string">'SantaGroup'</span><br>
+              };<br>
+              <br>
+              <span class="keyword">await</span> developer.<span class="string">establishConnection</span>();<br>
+              <span class="comment">// CONNECTION ESTABLISHED // RECRUITERS WELCOME</span>
+            </div>
+          </div>
+
+          <div class="contact-channels">
+            <a href="mailto:contato.andredevbr@icloud.com" class="channel-btn">
+              <div class="channel-icon" style="color: var(--neon-pink);"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <div class="channel-text">
+                <div class="channel-title">Direct Email</div>
+                <div class="channel-desc">contato.andredevbr@icloud.com</div>
+              </div>
+            </a>
+
+            <a href="https://linkedin.com/in/andre-cristo-998341200/" target="_blank" class="channel-btn">
+              <div class="channel-icon" style="color: #0077b5;"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.222 0h.003z"/></svg></div>
+              <div class="channel-text">
+                <div class="channel-title">LinkedIn Profile</div>
+                <div class="channel-desc">Connect on Professional Network</div>
+              </div>
+            </a>
+
+            <a href="https://discord.gg/gCZpDV8GvS" target="_blank" class="channel-btn">
+              <div class="channel-icon" style="color: #5865f2;"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.894.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></div>
+              <div class="channel-text">
+                <div class="channel-title">Discord Community</div>
+                <div class="channel-desc">discord.gg/gCZpDV8GvS</div>
+              </div>
+            </a>
+
+            <a href="https://github.com/andrecristodev" target="_blank" class="channel-btn">
+              <div class="channel-icon" style="color: #f5f5fa;"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div>
+              <div class="channel-text">
+                <div class="channel-title">GitHub Repository</div>
+                <div class="channel-desc">github.com/andrecristodev</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
-  <div class="scroll-hint">
-    <span>scroll</span>
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
-</section>
 
-<!-- ② ABOUT -->
-<section class="section" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-visual reveal">
-        <div class="avatar-ring">
-          <div class="avatar-inner">🎮</div>
-        </div>
-        <div class="code-badge">
-          <span style="color:var(--muted)">const</span> role = <span style="color:var(--cyan)">"FiveM Dev"</span>
-        </div>
-      </div>
-      <div class="reveal">
-        <p class="section-label">// about me</p>
-        <h2 class="section-title">Building worlds<br/>inside <span class="accent">GTA V</span></h2>
-        <div class="glow-line"></div>
-        <p class="about-text" style="margin-top:1.5rem;">
-          I'm <strong>Andre Cristo</strong>, a full-stack developer from Brazil with a niche specialization
-          in <strong>FiveM game development</strong> — creating scripts, UIs, and entire server
-          ecosystems for GTA V roleplay communities.
-        </p>
-        <p class="about-text">
-          I bridge the gap between <strong>game logic (Lua)</strong> and <strong>modern web
-          interfaces (React + TypeScript)</strong>, delivering pixel-perfect NUI panels that
-          feel native inside the game. Currently at <strong>SantaGroup</strong>, building
-          immersive RP experiences for thousands of players.
-        </p>
-        <div class="skill-chips">
-          <span class="chip">Lua</span>
-          <span class="chip">React</span>
-          <span class="chip">Next.js</span>
-          <span class="chip">TypeScript</span>
-          <span class="chip">Node.js</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">FiveM NUI</span>
-          <span class="chip">Tailwind CSS</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- FULLPAGE ENGINE JAVASCRIPT -->
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 6;
+    let isAnimating = false;
+    const slider = document.getElementById('slider');
+    const currSlideEl = document.getElementById('currSlide');
+    const sideDots = document.querySelectorAll('.side-dot');
+    const navItems = document.querySelectorAll('.nav-item');
 
-<!-- ③ TRAJECTORY -->
-<section class="section" id="trajectory">
-  <div class="container">
-    <div style="text-align:center;" class="reveal">
-      <p class="section-label">// career journey</p>
-      <h2 class="section-title">My <span class="accent">Trajectory</span></h2>
-      <div class="glow-line" style="margin:1.25rem auto 0;"></div>
-    </div>
-    <div class="timeline">
+    function updateHUD() {
+      // Update slide number
+      currSlideEl.textContent = String(currentSlide + 1).padStart(2, '0');
 
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-date">2020 — Present</div>
-        <div class="tl-title">FiveM Front-End Developer</div>
-        <div class="tl-company">Tadalas Systems / SantaGroup</div>
-        <div class="tl-desc">
-          Designing and developing NUI interfaces for FiveM roleplay servers — HUDs, inventory systems,
-          job panels, and full in-game web apps. Responsible for bridging Lua game scripts with
-          React-based user interfaces. Built and maintained the Tadalas Systems brand as an
-          independent dev studio.
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">Lua</span>
-          <span class="tl-tag">React</span>
-          <span class="tl-tag">FiveM</span>
-          <span class="tl-tag">NUI</span>
-          <span class="tl-tag">TypeScript</span>
-        </div>
-      </div>
+      // Update side dots
+      sideDots.forEach((dot, idx) => {
+        if (idx === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
 
-      <div class="tl-item">
-        <div class="tl-dot" style="background:var(--purple);box-shadow:0 0 12px var(--purple);"></div>
-        <div class="tl-date">2022 — 2023</div>
-        <div class="tl-title">Full-Stack Developer</div>
-        <div class="tl-company">Food Explorer Project</div>
-        <div class="tl-desc">
-          Built a complete restaurant management platform with React front-end and Node.js/Express
-          back-end. Implemented authentication, file upload, product management, and responsive design.
-          One of the first full-stack projects delivered end-to-end independently.
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">React</span>
-          <span class="tl-tag">Node.js</span>
-          <span class="tl-tag">SQLite</span>
-          <span class="tl-tag">Express</span>
-        </div>
-      </div>
+      // Update top nav
+      navItems.forEach((item, idx) => {
+        if (idx === currentSlide) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
 
-      <div class="tl-item">
-        <div class="tl-dot" style="background:var(--cyan);box-shadow:0 0 12px var(--cyan);"></div>
-        <div class="tl-date">2020 — 2022</div>
-        <div class="tl-title">Self-Taught Front-End Engineer</div>
-        <div class="tl-company">RocketSeat & Alura Bootcamps</div>
-        <div class="tl-desc">
-          Intensive self-learning journey through JavaScript fundamentals, HTML/CSS, and React.
-          Completed multiple bootcamps, built dozens of exercises and projects. Developed a deep
-          obsession with UI quality and FiveM modding that shaped the entire career direction.
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">JavaScript</span>
-          <span class="tl-tag">HTML/CSS</span>
-          <span class="tl-tag">React</span>
-          <span class="tl-tag">Git</span>
-        </div>
-      </div>
+    function goToSlide(index) {
+      if (index < 0 || index >= totalSlides || isAnimating) return;
+      isAnimating = true;
+      currentSlide = index;
+      slider.style.transform = `translateY(-${currentSlide * 100}vh)`;
+      updateHUD();
 
-      <div class="tl-item">
-        <div class="tl-dot" style="background:var(--muted);box-shadow:none;"></div>
-        <div class="tl-date">August 2020</div>
-        <div class="tl-title">First GitHub Commit</div>
-        <div class="tl-company">github.com/andrecristodev</div>
-        <div class="tl-desc">
-          Joined GitHub and pushed first code. What started as simple HTML exercises quickly evolved
-          into a passion for building real products — from Discord tools to game server scripts.
-        </div>
-        <div class="tl-tags">
-          <span class="tl-tag">HTML</span>
-          <span class="tl-tag">JavaScript</span>
-          <span class="tl-tag">GitHub</span>
-        </div>
-      </div>
+      setTimeout(() => {
+        isAnimating = false;
+      }, 850);
+    }
 
-    </div>
-  </div>
-</section>
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1);
+      }
+    }
 
-<!-- ④ STACK -->
-<section class="section" id="stack">
-  <div class="container">
-    <div style="text-align:center;" class="reveal">
-      <p class="section-label">// technologies</p>
-      <h2 class="section-title">My <span class="accent">Stack</span></h2>
-      <div class="glow-line" style="margin:1.25rem auto 0;"></div>
-    </div>
-    <div class="stack-grid reveal">
-      <div class="stack-card"><span class="stack-icon">⚛️</span><span class="stack-name">React</span><span class="stack-sub">UI Library</span></div>
-      <div class="stack-card"><span class="stack-icon">▲</span><span class="stack-name">Next.js</span><span class="stack-sub">Framework</span></div>
-      <div class="stack-card"><span class="stack-icon">🟦</span><span class="stack-name">TypeScript</span><span class="stack-sub">Language</span></div>
-      <div class="stack-card"><span class="stack-icon">🟨</span><span class="stack-name">JavaScript</span><span class="stack-sub">Language</span></div>
-      <div class="stack-card"><span class="stack-icon">🟢</span><span class="stack-name">Node.js</span><span class="stack-sub">Runtime</span></div>
-      <div class="stack-card"><span class="stack-icon">🌊</span><span class="stack-name">Tailwind</span><span class="stack-sub">CSS Framework</span></div>
-      <div class="stack-card"><span class="stack-icon">🐘</span><span class="stack-name">PostgreSQL</span><span class="stack-sub">Database</span></div>
-      <div class="stack-card"><span class="stack-icon">🐬</span><span class="stack-name">MySQL</span><span class="stack-sub">Database</span></div>
-      <div class="stack-card"><span class="stack-icon">🎮</span><span class="stack-name">Lua</span><span class="stack-sub">FiveM Scripts</span></div>
-      <div class="stack-card"><span class="stack-icon">🔺</span><span class="stack-name">Prisma</span><span class="stack-sub">ORM</span></div>
-      <div class="stack-card"><span class="stack-icon">🐳</span><span class="stack-name">Docker</span><span class="stack-sub">Containers</span></div>
-      <div class="stack-card"><span class="stack-icon">🐙</span><span class="stack-name">GitHub</span><span class="stack-sub">Version Control</span></div>
-    </div>
-  </div>
-</section>
+    function prevSlide() {
+      if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+      }
+    }
 
-<!-- ⑤ PROJECTS -->
-<section class="section" id="projects">
-  <div class="container">
-    <div style="text-align:center;" class="reveal">
-      <p class="section-label">// featured work</p>
-      <h2 class="section-title">Selected <span class="accent">Projects</span></h2>
-      <div class="glow-line" style="margin:1.25rem auto 0;"></div>
-    </div>
-    <div class="projects-grid">
+    // Wheel Event Engine with Debounce & Threshold
+    let wheelDeltaAccumulator = 0;
+    let wheelTimer = null;
 
-      <a class="project-card reveal" href="https://github.com/andrecristodev/fivem-ecommerce-boilerplate" target="_blank" rel="noopener">
-        <div class="project-header">
-          <span class="project-icon">🛒</span>
-          <span class="project-badge badge-fivem">FiveM</span>
-        </div>
-        <div class="project-name">FiveM E-Commerce Boilerplate</div>
-        <div class="project-desc">Modern GTA V premium packs store built with Next.js 14, React & Tailwind CSS. Multi-language (PT/EN/ES), shopping cart, admin dashboard with charts, and responsive Kiro-themed design.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="lang-dot" style="background:#f7df1e;"></span>JavaScript</span>
-          <span class="project-link">View →</span>
-        </div>
-      </a>
+    window.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (isAnimating) return;
 
-      <a class="project-card reveal" href="https://github.com/andrecristodev/fivem-react-boilerplate-lua" target="_blank" rel="noopener">
-        <div class="project-header">
-          <span class="project-icon">⚙️</span>
-          <span class="project-badge badge-fivem">FiveM</span>
-        </div>
-        <div class="project-name">FiveM React + Lua Boilerplate</div>
-        <div class="project-desc">Production-ready boilerplate for building FiveM NUI interfaces with React (TypeScript) and Lua. Handles the bridge between game events and the web UI out of the box.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="lang-dot" style="background:#3178c6;"></span>TypeScript</span>
-          <span class="project-link">View →</span>
-        </div>
-      </a>
+      wheelDeltaAccumulator += e.deltaY;
+      clearTimeout(wheelTimer);
 
-      <a class="project-card reveal" href="https://github.com/andrecristodev/fivem-greenscreener" target="_blank" rel="noopener">
-        <div class="project-header">
-          <span class="project-icon">📸</span>
-          <span class="project-badge badge-fivem">FiveM</span>
-        </div>
-        <div class="project-name">FiveM Greenscreener</div>
-        <div class="project-desc">Automated FiveM script that captures screenshots of every GTA clothing item, prop, object, and vehicle against a green screen — essential tooling for server asset pipelines.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="lang-dot" style="background:#f7df1e;"></span>JavaScript</span>
-          <span class="project-link">View →</span>
-        </div>
-      </a>
+      wheelTimer = setTimeout(() => {
+        wheelDeltaAccumulator = 0;
+      }, 200);
 
-      <a class="project-card reveal" href="https://github.com/andrecristodev/LiveFreeBrasil" target="_blank" rel="noopener">
-        <div class="project-header">
-          <span class="project-icon">📡</span>
-          <span class="project-badge badge-web">Web</span>
-        </div>
-        <div class="project-name">LiveFreeBrasil</div>
-        <div class="project-desc">CLI and one-click tool to unlock screen sharing and camera streaming on Discord for Brazilian users. Reached 4 stars organically with zero promotion.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="lang-dot" style="background:#e34c26;"></span>HTML</span>
-          <span class="project-link">View →</span>
-        </div>
-      </a>
+      if (Math.abs(wheelDeltaAccumulator) >= 30) {
+        if (wheelDeltaAccumulator > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        wheelDeltaAccumulator = 0;
+      }
+    }, { passive: false });
 
-      <a class="project-card reveal" href="https://github.com/andrecristodev/explorer-food-front-end" target="_blank" rel="noopener">
-        <div class="project-header">
-          <span class="project-icon">🍽️</span>
-          <span class="project-badge badge-web">Full-Stack</span>
-        </div>
-        <div class="project-name">Food Explorer</div>
-        <div class="project-desc">Complete restaurant management platform. React front-end with Node.js/Express API, file upload, authentication, and full product management — delivered end-to-end.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="lang-dot" style="background:#f7df1e;"></span>JavaScript</span>
-          <span class="project-link">View →</span>
-        </div>
-      </a>
+    // Keyboard Engine
+    window.addEventListener('keydown', (e) => {
+      if (isAnimating) return;
 
-      <a class="project-card reveal" href="https://github.com/andrecristodev/front-end-boas-praticas-PT-BR" target="_blank" rel="noopener">
-        <div class="project-header">
-          <span class="project-icon">📚</span>
-          <span class="project-badge badge-web">Knowledge</span>
-        </div>
-        <div class="project-name">Front-End Best Practices</div>
-        <div class="project-desc">Years of curated research, patterns, and front-end best practices documented in Portuguese. A living knowledge base for the Brazilian developer community.</div>
-        <div class="project-footer">
-          <span class="project-lang"><span class="lang-dot" style="background:#8b949e;"></span>Markdown</span>
-          <span class="project-link">View →</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ⑥ CONTACT -->
-<section class="section" id="contact">
-  <div class="container">
-    <div class="reveal">
-      <p class="section-label">// let's connect</p>
-      <h2 class="section-title" style="text-align:center;">Open to <span class="accent">Opportunities</span></h2>
-      <div class="glow-line" style="margin:1.25rem auto 0;"></div>
-      <p style="color:var(--muted);margin-top:1.5rem;font-size:1.05rem;max-width:520px;margin-left:auto;margin-right:auto;">
-        Looking for a developer who speaks both <strong style="color:var(--text)">game logic</strong> and
-        <strong style="color:var(--text)">modern web</strong>? Let's build something together.
-      </p>
-    </div>
-    <div class="contact-grid reveal">
-      <a class="contact-card" href="https://linkedin.com/in/andre-cristo-998341200/" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
-      <a class="contact-card" href="https://github.com/andrecristodev" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <a class="contact-card" href="https://discord.gg/gCZpDV8GvS" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.033.053a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-        Discord
-      </a>
-      <a class="contact-card" href="mailto:contato.andredevbr@icloud.com">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Email
-      </a>
-    </div>
-    <p class="footer-text">
-      Built by <a href="https://github.com/andrecristodev">Andre Cristo</a> · 2026 · Tadalas Systems
-    </p>
-  </div>
-</section>
-
-<script>
-  /* ── Particle canvas ────────────────────────────────────────────── */
-  const canvas = document.getElementById('canvas-bg');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  function initParticles() {
-    particles = Array.from({ length: 80 }, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.5,
-      a: Math.random(),
-    }));
-  }
-
-  function drawParticles() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(88,166,255,${p.a * 0.6})`;
-      ctx.fill();
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (['1','2','3','4','5','6'].includes(e.key)) {
+        goToSlide(parseInt(e.key) - 1);
+      }
     });
-    // Connect nearby particles
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(88,166,255,${0.12 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
+
+    // Touch Swipe Engine
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+
+      if (Math.abs(deltaY) > 50) {
+        if (deltaY > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
         }
       }
-    }
-    requestAnimationFrame(drawParticles);
-  }
+    }, { passive: true });
 
-  resize();
-  initParticles();
-  drawParticles();
-  window.addEventListener('resize', () => { resize(); initParticles(); });
-
-  /* ── Typing animation ───────────────────────────────────────────── */
-  const phrases = [
-    'FiveM Front-End Developer',
-    'React & Next.js Engineer',
-    'Lua + NUI Specialist',
-    'Full-Stack from Brazil 🇧🇷',
-    'Building immersive GTA V worlds',
-  ];
-  let pi = 0, ci = 0, deleting = false;
-  const el = document.getElementById('typedText');
-
-  function type() {
-    const phrase = phrases[pi];
-    if (!deleting) {
-      el.textContent = phrase.slice(0, ++ci);
-      if (ci === phrase.length) { deleting = true; setTimeout(type, 2000); return; }
-    } else {
-      el.textContent = phrase.slice(0, --ci);
-      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
-    }
-    setTimeout(type, deleting ? 40 : 70);
-  }
-  type();
-
-  /* ── Counter animation ──────────────────────────────────────────── */
-  function animateCounters() {
-    document.querySelectorAll('[data-count]').forEach(el => {
-      const target = +el.dataset.count;
-      const divide = el.dataset.divide ? +el.dataset.divide : 1;
-      const suffix = el.dataset.suffix || '';
-      let current = 0;
-      const step = target / 60;
-      const timer = setInterval(() => {
-        current = Math.min(current + step, target);
-        const val = current / divide;
-        el.textContent = divide > 1
-          ? val.toFixed(1) + suffix
-          : Math.round(current).toLocaleString();
-        if (current >= target) clearInterval(timer);
-      }, 16);
-    });
-  }
-  setTimeout(animateCounters, 300);
-
-  /* ── Scroll reveal ──────────────────────────────────────────────── */
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-  document.querySelectorAll('.tl-item').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.12}s`;
-    revealObs.observe(el);
-  });
-
-  /* ── Dot nav ────────────────────────────────────────────────────── */
-  const sections = ['hero','about','trajectory','stack','projects','contact'];
-  const dots = document.querySelectorAll('.dot-nav button');
-
-  dots.forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.getElementById(btn.dataset.target).scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  const secObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const idx = sections.indexOf(e.target.id);
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    // HUD Live Clock
+    function updateLiveClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      const clockEl = document.getElementById('hudClock');
+      if (clockEl) {
+        clockEl.textContent = `${h}:${m}:${s} EST`;
       }
-    });
-  }, { threshold: 0.5 });
+    }
+    setInterval(updateLiveClock, 1000);
+    updateLiveClock();
 
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) secObs.observe(el);
-  });
-</script>
+    updateHUD();
+  </script>
 </body>
 </html>
